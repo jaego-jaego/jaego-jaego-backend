@@ -25,4 +25,5 @@ public class AccountController {
         accountService.save(accountJoinDTO);
         return "";
     }
+
 }
