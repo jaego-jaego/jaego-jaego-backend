@@ -1,7 +1,8 @@
-package jaegojaego.back.web.account.controller;
+package jaegojaego.back.web.domain.account.controller;
 
-import jaegojaego.back.web.account.dto.AccountJoinParamVO;
-import jaegojaego.back.web.account.service.AccountService;
+import jaegojaego.back.web.domain.account.dto.AccountJoinDTO;
+import jaegojaego.back.web.domain.account.dto.AccountJoinParamVO;
+import jaegojaego.back.web.domain.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,9 @@ public class AccountController {
 
     //회원가입
     @PostMapping("/join")
-    public String accountJoin(@RequestBody AccountJoinParamVO accountJoinParamVO){
+    public String accountJoin(@RequestBody AccountJoinDTO accountJoinDTO){
+        log.info("accountJoinDTO 확인 ========> {}", accountJoinDTO);
+        accountService.save(accountJoinDTO);
         return "";
     }
 }

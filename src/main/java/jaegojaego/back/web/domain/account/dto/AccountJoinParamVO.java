@@ -1,4 +1,4 @@
-package jaegojaego.back.web.account.dto;
+package jaegojaego.back.web.domain.account.dto;
 
 import jakarta.persistence.Column;
 import lombok.Data;
