@@ -12,9 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+
     @Transactional
-    public AccountJoinDTO save(AccountJoinDTO accountJoinDTO) {
+    public AccountJoinDTO.Response save(AccountJoinDTO.Request requestDto) {
+        AccountJoinDTO accountJoinDTO = new AccountJoinDTO(requestDto);
         Account savedAccount = accountRepository.save(accountJoinDTO.toEntity());
-        return new AccountJoinDTO(savedAccount);
+
+        return AccountJoinDTO.Response.fromEntity(savedAccount);
     }
 }

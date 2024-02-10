@@ -1,13 +1,11 @@
 package jaegojaego.back.web.domain.account.entity;
 
-import io.swagger.v3.oas.annotations.info.Contact;
 import jaegojaego.back.web.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
-import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
