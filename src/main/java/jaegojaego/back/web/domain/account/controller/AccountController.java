@@ -3,9 +3,12 @@ package jaegojaego.back.web.domain.account.controller;
 import jaegojaego.back.web.common.apiResult.ApiResult;
 import jaegojaego.back.web.domain.account.dto.AccountJoinDTO;
 import jaegojaego.back.web.domain.account.dto.AccountLoginDTO;
+import jaegojaego.back.web.domain.account.entity.Account;
 import jaegojaego.back.web.domain.account.service.AccountService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     private final AccountService accountService;
+    @Autowired
+    private HttpSession httpSession;
 
     //회원가입
     @PostMapping("/join")
@@ -34,12 +39,20 @@ public class AccountController {
         log.info("AccountLoginDTO 확인 ========> {}", requestDto);
         ApiResult<AccountLoginDTO.Response> test = new ApiResult<AccountLoginDTO.Response>();
 
+        AccountLoginDTO.Response account = accountService.login(requestDto);
+        if (account != null) {
+            // 로그인 성공 시 세션에 사용자 정보를 저장합니다.
+            httpSession.setAttribute("loggedInUser", account);
+            httpSession.setAttribute("nickname", account.getName());
+
+            return ApiResult.success(account);
+        } else {
+            log.info("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+            return null;
+        }
         //TODO 비밀번호 조회 로직
         //TODO 아이디 조회 로직
-
         //TODO return 변경
-
-        return test;
     }
 
 }
