@@ -6,7 +6,9 @@ import jaegojaego.back.web.domain.account.dto.AccountLoginDTO;
 import jaegojaego.back.web.domain.account.entity.Account;
 import jaegojaego.back.web.domain.account.service.AccountService;
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +34,7 @@ public class AccountController {
         ApiResult<AccountJoinDTO.Response> getAccountJoinResponse = ApiResult.success(response);
         return getAccountJoinResponse;
     }
+
 
     //로그인
     @PostMapping("/login")

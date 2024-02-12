@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
+
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -39,6 +42,14 @@ public class Account extends BaseEntity {
     @Column(nullable = false)
     private String userPw; //비밀번호
 
+    private int failCount; //비밀번호
+
+    private LocalDateTime lastFailLogin;
+
+    public void failLogin(int count,LocalDateTime date){
+        this.failCount = count;
+        this.lastFailLogin = date;
+    }
     @Builder
     public Account(String email, String phone, String name, RabbitConnectionDetails.Address address, String businessNumber, String openDate, String shopName, String userId, String userPw) {
         this.email = email;
@@ -49,6 +60,9 @@ public class Account extends BaseEntity {
         this.shopName = shopName;
         this.userId = userId;
         this.userPw = userPw;
+        this.failCount = 0;
+        this.lastFailLogin = null;
     }
+
 
 }

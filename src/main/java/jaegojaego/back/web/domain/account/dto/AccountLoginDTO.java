@@ -4,6 +4,7 @@ import jaegojaego.back.web.domain.account.entity.Account;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @Getter
@@ -75,4 +76,5 @@ public class AccountLoginDTO {
                 .build();
         return account;
     }
+
 }
