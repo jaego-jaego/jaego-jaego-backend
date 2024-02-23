@@ -1,5 +1,6 @@
 package jaegojaego.back.web.domain.product.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jaegojaego.back.web.domain.product.entity.Product;
 import jakarta.persistence.Column;
 import lombok.*;
@@ -11,24 +12,38 @@ public class ProductInsertDTO {
 
     @Data
     public static class Request {
+        @Schema(description = "품명")
         private String productName;     // 품명
+        @Schema(description = "주요 납품처")
         private String  mainCustomer;   // 주요 납품처
+        @Schema(description = "유효 아이디")
         private String validId;         // 유효 아이디
+        @Schema(description = "연자리수")
         private int yearNum;            // 연자리수
+        @Schema(description = "월자리수")
         private int monthNum;           // 월자리수
+        @Schema(description = "일자리수")
         private int dateNum;            // 일자리수
+        @Schema(description = "순번자리수")
         private int numDigits;          // 순번자리수
     }
 
     @Data
     public static class Response {
 
+        @Schema(description = "품명")
         private String productName;     // 품명
+        @Schema(description = "주요 납품처")
         private String  mainCustomer;   // 주요 납품처
+        @Schema(description = "유효 아이디")
         private String validId;         // 유효 아이디
+        @Schema(description = "연자리수")
         private int yearNum;            // 연자리수
+        @Schema(description = "월자리수")
         private int monthNum;           // 월자리수
+        @Schema(description = "일자리수")
         private int dateNum;            // 일자리수
+        @Schema(description = "순번자리수")
         private int numDigits;          // 순번자리수
         public static jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response fromEntity(Product product) {
             jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response response = new jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response();
