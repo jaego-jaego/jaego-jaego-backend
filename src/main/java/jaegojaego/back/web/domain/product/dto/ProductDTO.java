@@ -2,16 +2,16 @@ package jaegojaego.back.web.domain.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jaegojaego.back.web.domain.product.entity.Product;
-import jakarta.persistence.Column;
 import lombok.*;
 
 @Data
 @Getter
 @NoArgsConstructor
-public class ProductInsertDTO {
-
+public class ProductDTO {
     @Data
     public static class Request {
+        @Schema(description = "품번")
+        private int productId;
         @Schema(description = "품명")
         private String productName;     // 품명
         @Schema(description = "주요 납품처")
@@ -31,6 +31,8 @@ public class ProductInsertDTO {
     @Data
     public static class Response {
 
+        @Schema(description = "품번")
+        private int productId;     // 품명
         @Schema(description = "품명")
         private String productName;     // 품명
         @Schema(description = "주요 납품처")
@@ -45,8 +47,9 @@ public class ProductInsertDTO {
         private int dateNum;            // 일자리수
         @Schema(description = "순번자리수")
         private int numDigits;          // 순번자리수
-        public static jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response fromEntity(Product product) {
-            jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response response = new jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response();
+        public static ProductDTO.Response fromEntity(Product product) {
+            ProductDTO.Response response = new ProductDTO.Response();
+            response.setProductId(product.getProductId());
             response.setProductName(product.getProductName());
             response.setMainCustomer(product.getMainCustomer());
             response.setValidId(product.getValidId());
@@ -58,14 +61,20 @@ public class ProductInsertDTO {
         }
     }
 
-    private jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Request request;
-    private jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response response;
+    @Data
+    public static class Delete {
+        private Long productId;
+    }
 
-    public ProductInsertDTO(jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Request request) {
+
+    private ProductDTO.Request request;
+    private ProductDTO.Response response;
+
+    public ProductDTO(ProductDTO.Request request) {
         this.request = request;
     }
 
-    public ProductInsertDTO(jaegojaego.back.web.domain.product.dto.ProductInsertDTO.Response response) {
+    public ProductDTO(ProductDTO.Response response) {
         this.response = response;
     }
 
