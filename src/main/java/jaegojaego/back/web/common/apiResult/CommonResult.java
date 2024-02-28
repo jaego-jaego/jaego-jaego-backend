@@ -16,6 +16,18 @@ public class CommonResult {
         return result;
     }
 
+    public static CommonResult notFound() {
+        return notFound(new CommonResult());
+    }
+
+
+    protected static CommonResult notFound(CommonResult result) {
+        result.setSuccess(true);
+        result.setCode(CommonResponse.NOT_FOUND.getCode());
+        result.setMsg(CommonResponse.NOT_FOUND.getMessage());
+        return result;
+    }
+
     public static CommonResult fail() {
         return fail(CommonResult.CommonResponse.FAIL);
     }
@@ -117,6 +129,7 @@ public class CommonResult {
 
     public static enum CommonResponse implements Response {
         SUCCESS("200", "정상"),
+        NOT_FOUND("404","해당 데이터를 찾을 수 없습니다."),
         BAD_REQUEST("4000", "검증 오류"),
         FEIGN_CONNECT_FAIL("5010", "서버 연동 중 오류가 발생했습니다."),
         UNAUTHORIZED("9401", "인증되지 않은 사용자"),

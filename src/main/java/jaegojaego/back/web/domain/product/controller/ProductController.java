@@ -1,6 +1,8 @@
 package jaegojaego.back.web.domain.product.controller;
 
+import com.google.protobuf.Api;
 import jaegojaego.back.web.common.apiResult.ApiResult;
+import jaegojaego.back.web.common.apiResult.CommonResult;
 import jaegojaego.back.web.domain.product.dto.ProductDTO;
 import jaegojaego.back.web.domain.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -24,20 +26,14 @@ public class ProductController {
         ApiResult<ProductDTO.Response> getProductInsertResponse = ApiResult.success(response);
         return getProductInsertResponse;
     }
-//
-//    @PostMapping("/delete")
-//    public ApiResult<ProductDeleteDTO>productDelete(@RequestBody ProductDeleteDTO req){
-//        log.info("productDelete 확인 ========> {}", req);
-//        productService.delete(req.getProductId());
-//        ApiResult<ProductDeleteDTO> getProductDelete = ApiResult.success(req);
-//        return getProductDelete;
-//    }
 
     @PostMapping("/delete")
-    public ApiResult<ProductDTO.Delete>productDelete(@RequestBody ProductDTO.Delete req){
+    public ApiResult<ProductDTO.Delete>productDelete(@RequestBody ProductDTO.Delete req) {
         log.info("productDelete 확인 ========> {}", req);
-        productService.delete(req.getProductId());
-        ApiResult<ProductDTO.Delete> getProductDelete = ApiResult.success(req);
-        return getProductDelete;
+        ProductDTO.Delete delete = productService.delete(req);
+        ApiResult<ProductDTO.Delete> deleteApiResult = ApiResult.notFound(delete);
+
+        return delete != null ? ApiResult.success(delete) : ApiResult.notFound(delete);
+
     }
 }

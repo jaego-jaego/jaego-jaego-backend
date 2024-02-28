@@ -19,12 +19,14 @@ public class ProductService {
         Product product = productRepository.save(productDTO.toEntity());
         return ProductDTO.Response.fromEntity(product);
     }
-    public void delete(Long id){
-        if(productRepository.existsById(id)){
-            productRepository.deleteById(id);
+    public ProductDTO.Delete delete(ProductDTO.Delete req){
+        if(productRepository.existsById(req.getProductId())){
+            productRepository.deleteById(req.getProductId());
         } else {
-            log.info(id+" 값을 가진 데이터를 찾을 수 없습니다.");
+            log.info(req.getProductId()+" 값을 가진 데이터를 찾을 수 없습니다.");
+            return null;
         }
+        return req;
     }
 
 //    public Pro
